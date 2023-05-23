@@ -1,0 +1,8 @@
+project: CoreGPX
+target: fuzz-CoreGPX
+testsuite:
+    - file://mayhem/testsuite
+
+cmds:
+  - cmd: /src/mayhem/fuzz_CoreGPX.py
+    libfuzzer: true
