@@ -1,0 +1,8 @@
+project: CoreGPX
+target: fuzz-CoreGPX
+testsuite:
+    - file://mayhem/testsuite
+
+cmds:
+  - cmd: /release/CoreGPXFuzz
+    libfuzzer: true

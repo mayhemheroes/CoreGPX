@@ -13,6 +13,9 @@ let package = Package(
         .library(
             name: "CoreGPX",
             targets: ["CoreGPX"]),
+        .executable(
+            name: "CoreGPXFuzz",
+            targets: ["CoreGPXFuzz"])
         ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -29,6 +32,19 @@ let package = Package(
             name: "CoreGPXTests",
             dependencies: ["CoreGPX"],
             path: "Example/Tests"),
+        .target(
+            name: "CoreGPXFuzz",
+            dependencies: ["CoreGPX"],
+            path: "mayhem",
+            sources: ["FuzzedDataProvider.swift", "main.swift"],
+            swiftSettings: [
+                .unsafeFlags(["-sanitize=fuzzer,address"]),
+                .unsafeFlags(["-parse-as-library"])
+            ],
+            linkerSettings: [
+                .unsafeFlags(["-sanitize=fuzzer,address"])
+            ]
+        )
         ],
     swiftLanguageVersions: [ .v4_2, .v5 ]
 )
